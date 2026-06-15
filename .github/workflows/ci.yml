@@ -21,8 +21,12 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install flask pytest
+          pip install flask pytest python-dotenv
 
       - name: Run tests
+        env:
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          APP_ENV: ${{ secrets.APP_ENV }}
         run: |
           pytest test_app.py -v
